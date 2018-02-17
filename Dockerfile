@@ -1,8 +1,12 @@
-FROM ubuntu:15.10
-MAINTAINER Aaron Herres <iam@aaronherres.com>
+FROM ubuntu:latest
+LABEL maintainer="Daniel Ståhl"
 
-RUN apt-get update && apt-get install nano -y
+RUN apt-get update && apt-get -y install chrony
+ADD chrony.conf /etc/chrony.conf
+RUN chmod ugo+r /etc/chrony.conf
 
-RUN apt-get install -y chrony
+EXPOSE 123/tcp \
+       123/udp
+
 
 CMD ["chronyd", "-d"]

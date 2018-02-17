@@ -1,2 +1,2 @@
-# docker-ntpd
-Run ntpd in docker! Originally for my insane ultrasonic-indoor-gps project.
+# docker-ntp
+Just an alpine chrony originating from the ubuntu version

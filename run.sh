@@ -1,7 +1,14 @@
-#/bin/sh
-docker rm -f ntp-server
+#/bin/bash
+docker stop ntp-server
+docker rm ntp-server
+
+docker volume create ntp-server
+
+
+docker build -t ntp-server .
 docker run \
--v $PWD/chrony-permissive-example.conf:/etc/chrony.conf \
--d --name="ntp-server" \
---net="host" \
---privileged ntp-server
+	--mount source=ntp-server,target=/var/docker/chrony/ \
+        --name="ntp-server" \
+	-p 123:123 \
+	--restart=unless-stopped \
+	ntp-server
